@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import {
+	Routes,
+	Route,
+	useNavigate,
+} from 'react-router-dom';
+import Home from './container/Home';
+import Login from './components/Login';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { fetchUser } from './utils/fetchUser';
+import Onboarding from './components/Onboarding';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	const navigate = useNavigate();
+
+	// useEffect(() => {
+	// 	const user = fetchUser();
+
+	// 	if (!user) navigate('/login');
+	// }, []);
+	return (
+		<GoogleOAuthProvider clientId="979909461173-muh0beffru01ja89qea3islerr9iegqp.apps.googleusercontent.com">
+			<Routes>
+				<Route path="login" element={<Login />} />
+				<Route path="onboarding" element={<Onboarding />} />
+				<Route path="/*" element={<Home />} />
+			</Routes>
+		</GoogleOAuthProvider>
+	);
+};
 
 export default App;
