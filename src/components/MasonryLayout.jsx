@@ -20,7 +20,7 @@ const MasonryLayout = ({pins}) => {
 		>
 			{pins?.map((pin) => (
 				<div
-					className="m-2"
+					className="m-1"
 					style={{
 						borderBottom: '.5px solid rgb(229 231 235)',
 					}}

@@ -6,6 +6,7 @@ import { Sidebar, UserProfile } from '../components'
 import { client } from '../client'
 import Pins from './Pins'
 import { userQuery } from '../utils/data'
+import { RiMenu2Fill } from 'react-icons/ri'
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false)
@@ -39,7 +40,7 @@ const Home = () => {
 			</div>
 			<div className="flex md:hidden flex-row">
 				<div className="p-2 w-full flex flex-row justify-between items-center shadow-md h-18">
-					<HiMenu
+					<RiMenu2Fill
 						fontSize={30}
 						className="cursor-pointer"
 						onClick={() => setToggleSidebar(true)}

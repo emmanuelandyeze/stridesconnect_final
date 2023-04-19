@@ -13,7 +13,7 @@ const isActiveStyle =
 	'flex  items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize';
 
 const breakpointObj = {
-	default: 2,
+	default: 3,
 	// 3000: 6,
 	// 2000: 5,
 	// 1200: 3,

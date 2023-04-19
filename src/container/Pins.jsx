@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import {Navbar, Feed, PinDetail, CreatePin, Search} from '../components'
+import CreateCommunity from '../components/CreateCommunity'
+import Communities from '../components/Communities'
+import CommunityDetail from '../components/CommunityDetail'
+import MyCommunity from '../components/MyCommunity'
 
 const Pins = ({user}) => {
   const [searchTerm, setSearchTerm] = useState('') 
   return (
-		<div className=" md:px-5">
+		<div style={{}} className=" md:px-3 rounded-xl">
 			<div className="bg-white">
 				<Navbar
 					searchTerm={searchTerm}
@@ -17,6 +21,19 @@ const Pins = ({user}) => {
 				<Routes>
 					<Route path="/" element={<Feed />} />
 					<Route
+						path="/community"
+						element={<Communities />}
+					/>
+					<Route
+						path="/community/:userId"
+						element={<MyCommunity />}
+					/>
+					<Route
+						path="/comm/:communityId"
+						element={<CommunityDetail user={user} />}
+					/>
+
+					<Route
 						path="/category/:categoryId"
 						element={<Feed />}
 					/>
@@ -27,6 +44,10 @@ const Pins = ({user}) => {
 					<Route
 						path="/create"
 						element={<CreatePin user={user} />}
+					/>
+					<Route
+						path="/create-community"
+						element={<CreateCommunity user={user} />}
 					/>
 					<Route
 						path="/search"

@@ -14,7 +14,7 @@ const isActiveStyle =
 	'flex  items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize';
 
   const breakpointObj = {
-		default: 2,
+		default: 3,
 		// 3000: 6,
 		// 2000: 5,
 		// 1200: 3,
@@ -62,9 +62,9 @@ const Feed = () => {
   if (loading) return <Spinner message="We are adding new stories to your feed!" />
   if(!pins?.length) return <h2>No Stories available</h2>
   return (
-		<div className="flex flex-row max-w-4xl mx-auto">
+		<div className="flex flex-row max-w-2xl mx-auto">
 			{pins && <MasonryLayout pins={pins} />}
-			<div className="hidden md:block md:ml-5">
+			{/* <div className="hidden md:block md:ml-5">
 				<h3 className="mt-5 px-5 text-base md:text-md font-bold">
 					Discover Categories
 				</h3>
@@ -88,7 +88,7 @@ const Feed = () => {
 							</NavLink>
 						))}
 				</Masonry>
-			</div>
+			</div> */}
 		</div>
 	);
 }
