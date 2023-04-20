@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { HiMenu } from 'react-icons/hi'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import {Link, Route, Routes} from 'react-router-dom'
+import {Link, Route, Routes, useNavigate} from 'react-router-dom'
 import { Sidebar, UserProfile } from '../components'
 import { client } from '../client'
 import Pins from './Pins'
@@ -13,7 +13,8 @@ import { IoIosCreate } from 'react-icons/io';
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false)
   const [user, setUser] = useState(null)
-  const scrollRef = useRef(null)
+	const scrollRef = useRef(null)
+	const navigate = useNavigate()
 
   const userInfo =
 		localStorage.getItem('user') !== 'undefined'
@@ -63,7 +64,14 @@ const Home = () => {
 							/>
 						</Link>
 					) : (
-						<div></div>
+						<div>
+							<button
+								className="bg-purple-700 px-2 py-1 rounded-lg text-md text-white"
+								onClick={() => navigate('/login')}
+							>
+								Login
+							</button>
+						</div>
 					)}
 				</div>
 				{toggleSidebar && (
@@ -105,9 +113,11 @@ const Home = () => {
 				</Routes>
 			</div>
 
-			<div className="flex md:hidden fixed bottom-0 w-full">
-				<BottomNav />
-			</div>
+			{user && (
+				<div className="flex md:hidden fixed bottom-0 w-full">
+					<BottomNav />
+				</div>
+			)}
 		</div>
 	);
 }

@@ -29,7 +29,7 @@ const Pins = ({user}) => {
 						element={<MyCommunity />}
 					/>
 					<Route
-						path="/comm/:communityId"
+						path="/communities/:communityId"
 						element={<CommunityDetail user={user} />}
 					/>
 

@@ -57,7 +57,7 @@ const MyCommunity = () => {
 		}
 	}, [text, userId]);
 
-	if (!user) return <Spinner message="Loading your communitites" />;
+	if (!user) return <Spinner message="Loading your communities" />;
 
 	return (
 		<div className="relative pb-2 h-full justify-center items-center">
@@ -116,7 +116,7 @@ const MyCommunity = () => {
 					</div>
 					<div className="block md:hidden">
 						{communities?.map((community) => (
-							<div onClick={() => navigate(`/comm/${community?._id}`)} className="">
+							<div onClick={() => navigate(`/communities/${community?._id}`)} className="">
 								<div
 									className="flex flex-row items-center my-2"
 									style={{

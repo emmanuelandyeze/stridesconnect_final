@@ -20,13 +20,13 @@ const CommunityDetail = ({ user }) => {
 	const [comment, setComment] = useState('');
 	const [addingComment, setAddingComment] = useState(false);
 
+
 	const fetchCommunityDetails = () => {
 		const query = communityDetailQuery(communityId);
 
 		if (query) {
 			client.fetch(`${query}`).then((data) => {
 				setCommunityDetail(data[0]);
-				console.log(data);
 				
 			});
 		}
@@ -61,7 +61,7 @@ const CommunityDetail = ({ user }) => {
 	};
 
 	if (!CommunityDetail) {
-		return <Spinner message="Loading Story..." />;
+		return <Spinner message="Loading Community..." />;
 	}
 
 	return (
@@ -166,7 +166,7 @@ const CommunityDetail = ({ user }) => {
 									</div>
 									<div
 										style={{ width: '93%' }}
-										className="md:hidden flex flex-wrap pt-10 fixed bottom-1 mt-6 gap-3"
+										className="md:hidden flex flex-wrap pt-10 fixed bottom-16 mt-6 gap-3"
 									>
 										<Link to={`/profile/${user?._id}`}>
 											<img

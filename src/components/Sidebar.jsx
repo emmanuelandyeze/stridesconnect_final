@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { RiHomeFill } from 'react-icons/ri'
 import { MdExplore, MdOutlinePeopleAlt, MdPersonSearch } from 'react-icons/md'
 import { BiCalendarEvent } from 'react-icons/bi'
@@ -19,6 +19,7 @@ const Sidebar = ({ closeToggle }) => {
 		localStorage.getItem('user') !== 'undefined'
 			? JSON.parse(localStorage.getItem('user'))
 			: localStorage.clear();
+	
 
 	// useEffect(() => {
 	// 	const query = userQuery(userId);
@@ -32,6 +33,7 @@ const Sidebar = ({ closeToggle }) => {
 	const [open, setOpen] = useState(false);
 
 	const cancelButtonRef = useRef(null);
+	const navigate = useNavigate()
 	return (
 		<>
 			<div
@@ -62,27 +64,36 @@ const Sidebar = ({ closeToggle }) => {
 							<RiHomeFill size={25} />
 							Home
 						</NavLink>
-						<NavLink
-							to={'/search'}
-							className={({ isActive }) =>
-								isActive ? isActiveStyle : isNotActiveStyle
-							}
-							onClick={handleCloseSidebar}
-							key={'explore'}
-						>
-							<MdExplore size={25} />
-							Explore
-						</NavLink>
-						<NavLink
-							to={'/events'}
-							className={({ isActive }) =>
-								isActive ? isActiveStyle : isNotActiveStyle
-							}
-							onClick={handleCloseSidebar}
-						>
-							<BiCalendarEvent size={25} />
-							Events
-						</NavLink>
+						{user && (
+							<>
+								<NavLink
+									to={'/search'}
+									className={({ isActive }) =>
+										isActive
+											? isActiveStyle
+											: isNotActiveStyle
+									}
+									onClick={handleCloseSidebar}
+									key={'explore'}
+								>
+									<MdExplore size={25} />
+									Explore
+								</NavLink>
+								<NavLink
+									to={'/events'}
+									className={({ isActive }) =>
+										isActive
+											? isActiveStyle
+											: isNotActiveStyle
+									}
+									onClick={handleCloseSidebar}
+								>
+									<BiCalendarEvent size={25} />
+									Events
+								</NavLink>
+							</>
+						)}
+
 						{user && (
 							<NavLink
 								to={`comm/${user?.sub}`}
@@ -108,27 +119,39 @@ const Sidebar = ({ closeToggle }) => {
 							Find Community
 						</NavLink>
 
-						<button
-							type="button"
-							className="inline-flex justify-center w-24 mr-3 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 sm:ml-3 sm:w-auto"
-							onClick={() => setOpen(true)}
-						>
-							Create
-						</button>
+						{user ? (
+							<button
+								type="button"
+								className="inline-flex justify-center w-24 mr-3 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 sm:ml-3 sm:w-auto"
+								onClick={() => setOpen(true)}
+							>
+								Create
+							</button>
+						) : (
+							<button
+								type="button"
+								className="inline-flex justify-center w-24 mr-3 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 sm:ml-3 sm:w-auto"
+								onClick={() => navigate('/login')}
+							>
+								Login
+							</button>
+						)}
 					</div>
 				</div>
 				{user && (
-					<Link
-						to={`profile/${user?._id}`}
-						className="flex my-5 mb-3 gap-2 items-center bg-white rounded-lg mx-3"
-					>
-						<img
-							src={user?.image}
-							alt=""
-							className="w-10 h-10 rounded-full"
-						/>
-						<p>{user?.userName}</p>
-					</Link>
+					<>
+						<Link
+							to={`profile/${user?.sub}`}
+							className="flex my-5 mb-3 gap-2 items-center bg-white rounded-lg mx-3"
+						>
+							<img
+								src={user?.picture}
+								alt=""
+								className="w-10 h-10 rounded-full"
+							/>
+							<p>{user?.name}</p>
+						</Link>
+					</>
 				)}
 			</div>
 			<Transition.Root show={open} as={Fragment}>

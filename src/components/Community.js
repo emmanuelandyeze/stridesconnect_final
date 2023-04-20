@@ -69,7 +69,7 @@ const Community = ({
 			>
 				<div
 					className="flex flex-col justify-between p-4"
-					onClick={() => navigate(`/comm/${_id}`)}
+					onClick={() => navigate(`/communities/${_id}`)}
 				>
 					<div className="flex flex-row items-center">
 						<img

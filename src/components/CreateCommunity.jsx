@@ -182,27 +182,22 @@ const CreateCommunity = ({ user }) => {
 					</p>
 				)}
 			</div>
-			<div className="flex flx-col justify-center items-center mt-5 lg:h-4/5">
-				<div className="flex lg:flex-row flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-2/3 w-full">
-					<div className="bg-gray-200 p-3 flex flex-0.7 w-full">
-						<div className="flex justify-center items-center flex-col border-2 border-dotted border-gray-300 p-3 w-full h-96">
+			<div className="flex flex-col justify-center items-center mt-5 lg:h-4/5">
+				<div className="flex lg:flex-row flex-col justify-center items-center w-full bg-white lg:p-5 p-3 lg:w-2/3 md:w-28">
+					<div className="bg-gray-200 p-3 flex flex-0.7 w-28 h-28 rounded-full">
+						<div className="flex justify-center items-center flex-col rounded-full border-gray-300 p-3 w-28 h-28">
 							{loading && <Spinner />}
 							{wrongImageType && <p>Wrong image type</p>}
 							{!imageAsset ? (
 								<label>
-									<div className="flex flex-col items-center justify-center h-full">
+									<div className="flex flex-col items-center justify-center h-10">
 										<div className="flex flex-col justify-center items-center">
 											<p className="font-bold text-2xl">
 												<FcAddImage fontSize={60} />
 											</p>
-											<p className="text-lg">
-												Click to upload logo
-											</p>
+											
 										</div>
-										<p className="mt-24 text-gray-400 text-center">
-											Use high quality JPG, SVG, PNG, GIF or
-											TIFF less than 20 MB
-										</p>
+										
 									</div>
 									<input
 										type="file"
@@ -212,10 +207,10 @@ const CreateCommunity = ({ user }) => {
 									/>
 								</label>
 							) : (
-								<div className="relative h-full">
+								<div className="relative h-28 w-28">
 									<img
 										src={imageAsset?.url}
-										className="h-full w-full"
+										className="h-28 w-28 rounded-full object-cover"
 										alt=""
 									/>
 									<button
@@ -292,7 +287,8 @@ const CreateCommunity = ({ user }) => {
 					</div>
 				</div>
 			</div>
-			<div className="flex flx-col justify-center items-center mt-5 lg:h-4/5">
+			<div className="flex flex-col justify-center items-center mt-5 lg:h-4/5">
+				<p>Set community rules and guidelines</p>
 				<ReactQuill
 					theme="snow"
 					value={destination}
