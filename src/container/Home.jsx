@@ -105,7 +105,7 @@ const Home = () => {
 				</Routes>
 			</div>
 
-			<div className="flex md:hidden">
+			<div className="flex md:hidden fixed bottom-0 w-full">
 				<BottomNav />
 			</div>
 		</div>
