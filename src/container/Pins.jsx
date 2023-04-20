@@ -5,6 +5,7 @@ import CreateCommunity from '../components/CreateCommunity'
 import Communities from '../components/Communities'
 import CommunityDetail from '../components/CommunityDetail'
 import MyCommunity from '../components/MyCommunity'
+import SingleThread from '../components/SingleThread'
 
 const Pins = ({user}) => {
   const [searchTerm, setSearchTerm] = useState('') 
@@ -36,6 +37,10 @@ const Pins = ({user}) => {
 					<Route
 						path="/category/:categoryId"
 						element={<Feed />}
+					/>
+					<Route
+						path="/thread/:threadId"
+						element={<SingleThread user={user} />}
 					/>
 					<Route
 						path="/pin/:pinId"

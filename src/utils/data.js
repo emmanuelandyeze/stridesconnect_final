@@ -403,3 +403,73 @@ export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {
   }`;
 			return query;
 		};
+    
+export const communityThreadQuery = (communityId) => {
+	const query = `*[ _type == 'thread' && communityId == '${communityId}'] | order(_createdAt desc){
+    image{
+      asset->{
+        url
+      }
+    },
+    _id,
+	title,
+  createdAt,
+    postedBy->{
+      _id,
+      userName,
+      image
+    },
+    save[]{
+      postedBy->{
+        _id,
+        userName,
+        image
+      },
+    },
+    comments[]{
+      comment,
+      _key,
+      postedBy->{
+        _id,
+        userName,
+        image
+      },
+    }
+  }`;
+	return query;
+};
+
+export const threadDetailQuery = (threadId) => {
+	const query = `*[_type == "thread" && _id == '${threadId}']{
+    image{
+      asset->{
+        url
+      }
+    },
+    _id,
+    title, 
+    createdAt,
+    postedBy->{
+      _id,
+      userName,
+      image
+    },
+   save[]{
+      postedBy->{
+        _id,
+        userName,
+        image
+      },
+    },
+    comments[]{
+      comment,
+      _key,
+      postedBy->{
+        _id,
+        userName,
+        image
+      },
+    }
+  }`;
+	return query;
+};

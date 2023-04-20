@@ -81,7 +81,7 @@ const options = {
 				<span style={{ color: 'black' }}>
 					{domToReact(children, options)}
 				</span>
-			);
+			); 
 		}
 
 		if (attribs.a) {
