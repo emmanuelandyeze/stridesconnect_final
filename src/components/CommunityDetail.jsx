@@ -200,7 +200,7 @@ const CommunityDetail = ({ user }) => {
 											leaveFrom="opacity-100 translate-y-0 sm:scale-100"
 											leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 										>
-											<Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-1 sm:w-full sm:max-w-lg">
+											<Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-1 w-full sm:max-w-lg">
 												<div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
 													<div className="sm:flex sm:items-start">
 														<div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
@@ -210,25 +210,9 @@ const CommunityDetail = ({ user }) => {
 															>
 																Create a thread
 															</Dialog.Title>
-															<div className="mt-2">
-																<div className="text-center">
-																	<textarea
-																		className="border-2 md:w-96 w-full rounded-lg p-2"
-																		name=""
-																		id=""
-																		type="text"
-																		value={title}
-																		onChange={(e) =>
-																			setTitle(
-																				e.target.value,
-																			)
-																		}
-																		placeholder="What do you want to talk about?"
-																	></textarea>
-																</div>
-															</div>
+
 															<div className="bg-gray-200 p-3 flex flex-0.7 w-28 h-28 rounded-full">
-																<div className="flex justify-center items-center flex-col rounded-full border-gray-300 p-3 w-28 h-28">
+																<div className="flex justify-center items-center flex-col rounded-lg border-gray-300 p-3 w-28 h-28">
 																	{loading && <Spinner />}
 																	{wrongImageType && (
 																		<p>Wrong image type</p>
@@ -275,6 +259,23 @@ const CommunityDetail = ({ user }) => {
 																			</button>
 																		</div>
 																	)}
+																</div>
+															</div>
+															<div className="mt-2">
+																<div className="text-center">
+																	<textarea
+																		className="border-2 md:w-96 w-full rounded-lg p-2"
+																		name=""
+																		id=""
+																		type="text"
+																		value={title}
+																		onChange={(e) =>
+																			setTitle(
+																				e.target.value,
+																			)
+																		}
+																		placeholder="What do you want to talk about?"
+																	></textarea>
 																</div>
 															</div>
 														</div>
@@ -331,17 +332,17 @@ const CommunityDetail = ({ user }) => {
 								</p>
 							</div>
 							<div
-								className="mt-2 -ml-2"
-								style={{
-									position: 'fixed',
-									bottom: 10,
-									right: 5,
-								}}
+								className="mt-2 -ml-2 absolute right-5 bottom-20 md:right-80"
+								// style={{
+								// 	position: 'absolute',
+								// 	bottom: 70,
+								// 	right: 10,
+								// }}
 							>
 								{user && user?._id ? (
 									<button
 										type="button"
-										className="inline-flex justify-center w-24 mr-3 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 sm:ml-3 sm:w-auto"
+										className="inline-flex justify-center mr-3 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 sm:ml-3 sm:w-auto"
 										onClick={() => setOpen(true)}
 									>
 										<AiOutlinePlus size={30} />
