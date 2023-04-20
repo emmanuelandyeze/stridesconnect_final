@@ -7,6 +7,8 @@ import { client } from '../client'
 import Pins from './Pins'
 import { userQuery } from '../utils/data'
 import { RiMenu2Fill } from 'react-icons/ri'
+import BottomNav from '../components/BottomNav'
+import { IoIosCreate } from 'react-icons/io';
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false)
@@ -38,6 +40,7 @@ const Home = () => {
 			<div className="hidden md:flex h-screen flex-initial">
 				<Sidebar />
 			</div>
+
 			<div className="flex md:hidden flex-row">
 				<div className="p-2 w-full flex flex-row justify-between items-center shadow-md h-18">
 					<RiMenu2Fill
@@ -81,6 +84,11 @@ const Home = () => {
 					</div>
 				)}
 			</div>
+			{/* <div>
+				<button>
+					<IoIosCreate />
+				</button>
+			</div> */}
 			<div
 				className="pb-2 flex-1 h-screen overflow-y-scroll"
 				ref={scrollRef}
@@ -95,6 +103,10 @@ const Home = () => {
 						element={<Pins user={user && user} />}
 					/>
 				</Routes>
+			</div>
+
+			<div className="flex md:hidden">
+				<BottomNav />
 			</div>
 		</div>
 	);

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { RiHomeFill } from 'react-icons/ri'
-import { MdExplore, MdOutlinePeopleAlt } from 'react-icons/md'
+import { MdExplore, MdOutlinePeopleAlt, MdPersonSearch } from 'react-icons/md'
 import { BiCalendarEvent } from 'react-icons/bi'
 import { categories } from '../utils/data';
 import { Dialog, Transition } from '@headlessui/react';
@@ -85,7 +85,7 @@ const Sidebar = ({ closeToggle }) => {
 						</NavLink>
 						{user && (
 							<NavLink
-								to={`community/${user?.sub}`}
+								to={`comm/${user?.sub}`}
 								className={({ isActive }) =>
 									isActive
 										? isActiveStyle
@@ -104,7 +104,7 @@ const Sidebar = ({ closeToggle }) => {
 							}
 							onClick={handleCloseSidebar}
 						>
-							<MdOutlinePeopleAlt size={25} />
+							<MdPersonSearch size={25} />
 							Find Community
 						</NavLink>
 

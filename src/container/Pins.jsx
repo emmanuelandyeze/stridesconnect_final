@@ -10,14 +10,14 @@ const Pins = ({user}) => {
   const [searchTerm, setSearchTerm] = useState('') 
   return (
 		<div style={{}} className=" md:px-3 rounded-xl">
-			<div className="bg-white">
+			<div className="bg-white mx-auto hidden">
 				<Navbar
 					searchTerm={searchTerm}
 					setSearchTerm={setSearchTerm}
 					user={user}
 				/>
 			</div>
-			<div className="h-full pt-24">
+			<div className="h-full pt-18">
 				<Routes>
 					<Route path="/" element={<Feed />} />
 					<Route
@@ -25,7 +25,7 @@ const Pins = ({user}) => {
 						element={<Communities />}
 					/>
 					<Route
-						path="/community/:userId"
+						path="/comm/:userId"
 						element={<MyCommunity />}
 					/>
 					<Route

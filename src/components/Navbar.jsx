@@ -7,7 +7,7 @@ const Navbar = ({searchTerm, setSearchTerm, user}) => {
 
 
   return (
-		<div style={{zIndex: 1}} className="flex gap-1 bg-white md:gap-5 w-full max-w-screen-xl mx-auto pt-5 pb-7 absolute">
+		<div style={{zIndex: 1}} className="flex gap-1 bg-white md:gap-5 w-11/12 md:w-full max-w-screen-xl mx-auto pt-0 md:pt-5 md:pb-7 pb-0 absolute">
 		  <div className="flex justify-start items-center w-full border-none">
 				<label class="relative block w-full">
 					<span class="sr-only">Search</span>
