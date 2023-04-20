@@ -20,6 +20,7 @@ import { FcAddImage } from 'react-icons/fc';
 import { FaRegCommentAlt } from 'react-icons/fa'
 import {BiRightArrow} from 'react-icons/bi'
 import SingleThread from './SingleThread';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 const CommunityDetail = ({ user }) => {
 	const { communityId } = useParams();
@@ -329,16 +330,21 @@ const CommunityDetail = ({ user }) => {
 									{communityDetail?.about}
 								</p>
 							</div>
-							<div className="mt-2 -ml-2">
-								{user &&
-								user?._id ===
-									communityDetail?.postedBy._id ? (
+							<div
+								className="mt-2 -ml-2"
+								style={{
+									position: 'fixed',
+									bottom: 10,
+									right: 5,
+								}}
+							>
+								{user && user?._id ? (
 									<button
 										type="button"
 										className="inline-flex justify-center w-24 mr-3 rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 sm:ml-3 sm:w-auto"
 										onClick={() => setOpen(true)}
 									>
-										Create thread
+										<AiOutlinePlus size={30} />
 									</button>
 								) : (
 									<div></div>
@@ -351,93 +357,9 @@ const CommunityDetail = ({ user }) => {
 									{parse(communityDetail?.destination)}
 								</p>
 							</div>
-							{/* <h2 className="mt-5 text-2xl">Conversation</h2> */}
+
 							{user ? (
 								<>
-									{/* <div className="max-h-370 pb-16 flex flex-col justify-end ">
-										{communityDetail?.comments?.map(
-											(item) => (
-												<div
-													className="flex gap-2 mt-5 items-center bg-white rounded-lg"
-													key={item.comment}
-												>
-													<img
-														src={item.postedBy?.image}
-														className="w-10 h-10 rounded-full cursor-pointer"
-														alt="user-profile"
-													/>
-													<div className="flex flex-col">
-														<p className="font-bold">
-															{item.postedBy?.userName}
-														</p>
-														<p>{item.comment}</p>
-													</div>
-												</div>
-											),
-										)}
-									</div>
-									<div
-										style={{ width: '50%' }}
-										className="md:flex hidden pt-10 flex-wrap fixed bottom-1 mt-6 gap-3"
-									>
-										<Link to={`/profile/${user?._id}`}>
-											<img
-												src={user?.image}
-												className="w-10 h-10 rounded-full cursor-pointer"
-												alt="user-profile"
-											/>
-										</Link>
-										<input
-											aria-multiline
-											className=" flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300"
-											type="text"
-											placeholder="Add a comment"
-											value={comment}
-											onChange={(e) =>
-												setComment(e.target.value)
-											}
-										/>
-										<button
-											type="button"
-											className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none"
-											onClick={addComment}
-										>
-											{addingComment
-												? 'Posting...'
-												: 'Post'}
-										</button>
-									</div>
-									<div
-										style={{ width: '93%' }}
-										className="md:hidden flex flex-wrap pt-10 fixed bottom-16 mt-6 gap-3"
-									>
-										<Link to={`/profile/${user?._id}`}>
-											<img
-												src={user?.image}
-												className="w-10 h-10 rounded-full cursor-pointer"
-												alt="user-profile"
-											/>
-										</Link>
-										<input
-											aria-multiline
-											className=" flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300"
-											type="text"
-											placeholder="Add a comment"
-											value={comment}
-											onChange={(e) =>
-												setComment(e.target.value)
-											}
-										/>
-										<button
-											type="button"
-											className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none"
-											onClick={addComment}
-										>
-											{addingComment
-												? 'Posting...'
-												: 'Post'}
-										</button>
-									</div> */}
 									{threads?.map((item) => (
 										<div
 											className="py-4 cursor-pointer"
@@ -451,36 +373,52 @@ const CommunityDetail = ({ user }) => {
 										>
 											<div className="flex flex-row items-start">
 												<div
-													className="bg-white flex rounded-lg mr-2"
+													className="bg-white flex rounded-lg "
 													key={item._id}
 												>
 													<img
 														src={item.postedBy?.image}
-														className="w-10 h-10 rounded-full cursor-pointer"
+														className="w-10 h-10 mr-2 rounded-full cursor-pointer"
 														alt="user-profile"
 													/>
-												</div>
-												<div className="bg-gray-300 p-3 rounded-lg">
-													<div className="flex flex-col">
-														<p className="font-bold">
-															{item.postedBy?.userName}
-														</p>
-													</div>
-													<h1>{item?.title}</h1>
-													<div className="flex flex-row mt-3 justify-between">
-														<div className="flex flex-row items-center">
-															<FaRegCommentAlt className="mr-1" />
-															{!item?.comments ? (
-																<p>0</p>
-															) : (
-																<p>
-																	{item.comments.length}
-																</p>
-															)}
+													<div className="bg-gray-300 p-3 rounded-lg">
+														<div className="flex flex-col">
+															<p className="font-bold">
+																{item.postedBy?.userName}
+															</p>
 														</div>
-														<div className="flex flex-row items-center">
-															<p>Join Convo</p>
-															<BiRightArrow />
+														<h1>{item?.title}</h1>
+														{item?.image && (
+															<img
+																style={{
+																	height: '20rem',
+																	width: '100%',
+																	objectFit: 'cover',
+																}}
+																src={
+																	item?.image &&
+																	urlFor(item?.image).url()
+																}
+																className="rounded-lg mt-3"
+																alt=""
+															/>
+														)}
+
+														<div className="flex flex-row mt-3 justify-between">
+															<div className="flex flex-row items-center">
+																<FaRegCommentAlt className="mr-1" />
+																{!item?.comments ? (
+																	<p>0</p>
+																) : (
+																	<p>
+																		{item.comments.length}
+																	</p>
+																)}
+															</div>
+															<div className="flex flex-row items-center">
+																<p>Join Convo</p>
+																<BiRightArrow />
+															</div>
 														</div>
 													</div>
 												</div>
@@ -496,7 +434,6 @@ const CommunityDetail = ({ user }) => {
 								</div>
 							)}
 						</div>
-						
 					</div>
 				</>
 			)}
