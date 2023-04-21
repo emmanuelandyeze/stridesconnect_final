@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -17,8 +17,15 @@ const SingleThread = ({ user }) => {
 	const { threadId } = useParams();
 	const [pins, setPins] = useState();
 	const [threadDetail, setThreadDetail] = useState();
+	const [threadLength, setThreadLength] = useState(null);
 	const [comment, setComment] = useState('');
-    const [addingComment, setAddingComment] = useState(false);
+	const [addingComment, setAddingComment] = useState(false);
+	const messagesEndRef = useRef(null);
+	const scrollToBottom = () => {
+		messagesEndRef?.current?.scrollIntoView({
+			behavior: 'smooth',
+		});
+	};
     
    
 
@@ -36,7 +43,10 @@ const SingleThread = ({ user }) => {
 
 	useEffect(() => {
 		fetchThreadDetails();
+		scrollToBottom();
 	}, [threadId]);
+
+	
 
 	const addComment = () => {
 		if (comment) {
@@ -56,10 +66,25 @@ const SingleThread = ({ user }) => {
 				.then(() => {
 					fetchThreadDetails();
 					setComment('');
+					setThreadLength(threadDetail?.comments.length);
+					scrollToBottom();
 					setAddingComment(false);
 				});
 		}
 	};
+// 	if (threadDetail?.comments?.length) {
+	
+// }
+	// console.log(threadLength);
+	// useEffect(() => {
+		
+	// 	if (threadLength && threadDetail?.comments.length !== threadLength) {
+	// 		console.log(threadLength);
+	// 		alert('New message, please refresh the page')
+			
+	// 	}
+		
+	// }, [threadDetail])
 
 	if (!threadDetail) {
 		return <Spinner message="Loading Thread..." />;
@@ -166,6 +191,7 @@ const SingleThread = ({ user }) => {
 											</div>
 										))}
 									</div>
+
 									<div
 										style={{ width: '50%' }}
 										className="md:flex hidden pt-5 pb-5 flex-wrap fixed bottom-0 mt-6 gap-3 bg-white"
@@ -228,6 +254,7 @@ const SingleThread = ({ user }) => {
 												: 'Post'}
 										</button>
 									</div>
+									<div ref={messagesEndRef}></div>
 								</>
 							) : (
 								<div>
