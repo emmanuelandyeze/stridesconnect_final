@@ -20,7 +20,7 @@ const SingleThread = ({ user }) => {
 	const [comment, setComment] = useState('');
     const [addingComment, setAddingComment] = useState(false);
     
-    console.log(threadId)
+   
 
 	const fetchThreadDetails = () => {
 		const query = threadDetailQuery(threadId);
@@ -77,76 +77,98 @@ const SingleThread = ({ user }) => {
 						}}
 					>
 						<div className="w-full lg:w-4/5 p-5 flex-1 xl:min-w-620">
-							<div className="flex items-center justify-between"></div>
-							<Link
-								to={`/profile/${threadDetail?.postedBy._id}`}
-								className="flex gap-2 mt-5 items-center bg-white rounded-lg "
-							>
-								<img
-									src={threadDetail?.postedBy.image}
-									className="w-10 h-10 rounded-full"
-									alt="user-profile"
-								/>
-								<p className="font-bold">
-									{threadDetail?.postedBy.userName}
-								</p>
-							</Link>
-							<div>
-								<h1 className="text-2xl md:text-3xl font-semibold text-gray-700 break-words mt-3">
-									{threadDetail?.title}
-								</h1>
-							</div>
-							<hr className="my-5" />
-
-							<div className="my-3">
-								{threadDetail?.image &&
-								urlFor(threadDetail?.image).url() ? (
+							<div className="">
+								<Link
+									to={`/profile/${threadDetail?.postedBy._id}`}
+									className="flex gap-2 mt-5 items-center bg-white rounded-lg "
+								>
 									<img
-										style={{
-											height: '20rem',
-											width: '100%',
-											objectFit: 'cover',
-										}}
-										src={
-											threadDetail?.image &&
-											urlFor(threadDetail?.image).url()
-										}
-										className="rounded-lg"
-										alt="user-post"
+										src={threadDetail?.postedBy.image}
+										className="w-10 h-10 rounded-full"
+										alt="user-profile"
 									/>
-								) : (
-									<div></div>
-								)}
-							</div>
+									<p className="font-bold">
+										{threadDetail?.postedBy.userName}
+									</p>
+								</Link>
+								<div>
+									<h1 className="text-lg md:text-3xl font-semibold text-gray-700 break-words mt-3">
+										{threadDetail?.title}
+									</h1>
+								</div>
+								<hr className="my-5" />
 
+								<div className="my-3">
+									{threadDetail?.image &&
+									urlFor(threadDetail?.image).url() ? (
+										<img
+											style={{
+												height: '20rem',
+												width: '100%',
+												objectFit: 'cover',
+											}}
+											src={
+												threadDetail?.image &&
+												urlFor(threadDetail?.image).url()
+											}
+											className="rounded-lg"
+											alt="user-post"
+										/>
+									) : (
+										<div></div>
+									)}
+								</div>
+							</div>
 							<h2 className="mt-5 text-2xl">
 								Comments ({threadDetail?.comments?.length})
 							</h2>
 							{user ? (
 								<>
-									<div className="max-h-370 overflow-y-auto">
+									<div className="max-h-370 overflow-y-auto pb-28">
 										{threadDetail?.comments?.map((item) => (
-											<div
-												className="flex gap-2 mt-5 items-center bg-white rounded-lg"
-												key={item.comment}
-											>
-												<img
-													src={item.postedBy?.image}
-													className="w-10 h-10 rounded-full cursor-pointer"
-													alt="user-profile"
-												/>
-												<div className="flex flex-col">
-													<p className="font-bold">
-														{item.postedBy?.userName}
-													</p>
-													<p>{item.comment}</p>
-												</div>
+											<div>
+												{item?.postedBy._id ===
+												user?._id ? (
+													<div
+														className="flex flex-row-reverse gap-2 mt-5 items-start bg-white rounded-lg"
+														key={item.comment}
+													>
+														<img
+															src={item.postedBy?.image}
+															className="w-10 h-10 rounded-full cursor-pointer"
+															alt="user-profile"
+														/>
+														<div className="flex flex-col bg-slate-200 p-3 rounded-lg">
+															<p className="font-bold">
+																{item.postedBy?.userName}
+															</p>
+															<p>{item.comment}</p>
+														</div>
+													</div>
+												) : (
+													<div
+														className="flex gap-2 mt-5 items-start bg-white rounded-lg"
+														key={item.comment}
+													>
+														<img
+															src={item.postedBy?.image}
+															className="w-10 h-10 rounded-full cursor-pointer"
+															alt="user-profile"
+														/>
+														<div className="flex flex-col bg-slate-200 p-3 rounded-lg">
+															<p className="font-bold">
+																{item.postedBy?.userName}
+															</p>
+															<p>{item.comment}</p>
+														</div>
+													</div>
+												)}
 											</div>
 										))}
 									</div>
 									<div
 										style={{ width: '50%' }}
-										className="md:flex hidden pt-10 flex-wrap fixed bottom-1 mt-6 gap-3"
+										className="md:flex hidden pt-5 pb-5 flex-wrap fixed bottom-0 mt-6 gap-3 bg-white"
 									>
 										<Link to={`/profile/${user?._id}`}>
 											<img
@@ -177,7 +199,7 @@ const SingleThread = ({ user }) => {
 									</div>
 									<div
 										style={{ width: '93%' }}
-										className="md:hidden flex flex-wrap pt-10 fixed bottom-16 mt-6 gap-3"
+										className="md:hidden pt-5 pb-5 flex flex-wrap  bg-white fixed bottom-14 mt-6 gap-3"
 									>
 										<Link to={`/profile/${user?._id}`}>
 											<img

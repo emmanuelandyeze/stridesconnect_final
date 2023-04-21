@@ -36,7 +36,6 @@ const PinDetail = ({ user }) => {
 		}
 	};
 
-	console.log(pinDetail?.createdAt)
 
 	useEffect(() => {
 		fetchPinDetails();

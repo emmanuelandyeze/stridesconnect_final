@@ -358,9 +358,10 @@ const CommunityDetail = ({ user }) => {
 									{parse(communityDetail?.destination)}
 								</p>
 							</div>
+							
 
 							{user ? (
-								<>
+								<div className='flex flex-col'>
 									{threads?.map((item) => (
 										<div
 											className="py-4 cursor-pointer"
@@ -382,7 +383,7 @@ const CommunityDetail = ({ user }) => {
 														className="w-10 h-10 mr-2 rounded-full cursor-pointer"
 														alt="user-profile"
 													/>
-													<div className="bg-gray-300 p-3 rounded-lg">
+													<div className="bg-slate-200 p-3 rounded-lg">
 														<div className="flex flex-col">
 															<p className="font-bold">
 																{item.postedBy?.userName}
@@ -426,7 +427,7 @@ const CommunityDetail = ({ user }) => {
 											</div>
 										</div>
 									))}
-								</>
+								</div>
 							) : (
 								<div>
 									<p>
